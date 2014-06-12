@@ -1,0 +1,38 @@
+body {
+	/* background-color: #e5002f !important; */
+}
+.vertical a, .person a {
+ 	height: 200px;
+ 	color: #fff;
+ 	display: block;
+ 	width: 100%;
+ 	font-size:150%;
+ 	font-weight: bold;
+ 	text-align:center;
+ 	text-shadow:#000 1px 1px;
+}
+.vertical a:hover, .person a:hover {
+ 	text-decoration: none;
+}
+.person a, .vertical a {
+	padding-top:90px;
+}
+.vertical, .person {
+ 	opacity: 0.8;
+}
+.vertical:hover, .person:hover {
+	opacity: 1.0;
+}
+.vertical:hover a, .person:hover a {
+	color: #fff !important;
+}
+
+.person-photo {
+ 	margin-right:20px;
+}
+#header {
+	height: 120px;
+}
+#content {
+	margin-top: 120px;
+}

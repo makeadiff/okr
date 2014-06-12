@@ -1,0 +1,7 @@
+.objective_field, .key_result_field, .key_result_entry,.objective_entry {
+	width: 500px;
+	border: 0px solid #fff;
+}
+.grade {
+	width: 40px;
+}
