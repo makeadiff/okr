@@ -2,7 +2,7 @@
 if(empty($_SESSION['user_id'])) {
 	$url_parts = parse_url($config['site_url']);
 	$domain = $url_parts['scheme'] . '://' . $url_parts['host'];
-	header("Location: http://localhost/Projects/Madapp/index.php/auth/login/".base64_encode($domain . $config['PHP_SELF']));
+	header("Location: http://makeadiff.in/madapp/index.php/auth/login/".base64_encode($domain . $config['PHP_SELF']));
 	exit;
 }
 
