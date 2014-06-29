@@ -1,6 +1,11 @@
 <?php
-//$_SESSION += array('user_id' => 1, 'name' => 'Binny V A');
-$_SESSION += array('user_id' => 23068, 'name' => 'Sahil Arora');
+if(empty($_SESSION['user_id'])) {
+	$url_parts = parse_url($config['site_url']);
+	$domain = $url_parts['scheme'] . '://' . $url_parts['host'];
+	header("Location: http://localhost/Projects/Madapp/index.php/auth/login/".base64_encode($domain . $config['PHP_SELF']));
+	exit;
+}
+
 $user_id = $_SESSION['user_id'];
 $current_user = $sql->from('User')->find($user_id);
 

@@ -19,12 +19,12 @@
 
 	<div class="collapse navbar-collapse">
 	<ul id="nav-links" class="nav navbar-nav pull-right">
-	<li><a href="index.php">Home</a></li>
-	<li><a href="person.php?user_id=0">Random ;-)</a></li>
-	<li><a href="verticals.php?mode=vertical">Vertical View</a></li>
-	<li><a href="regions.php?mode=horizondal">Horizondal View</a></li>
-	<li><a href="people.php?city_id=<?php echo $current_user['city_id'] ?>">Team View</a></li>
-	<li><form action="" method="post"><select name="timeframe">
+	<li><a href="index.php?timeframe=<?php echo $current_timeframe ?>">Home</a></li>
+	<li><a href="person.php?user_id=0&amp;timeframe=<?php echo $current_timeframe ?>">Random ;-)</a></li>
+	<li><a href="verticals.php?mode=vertical&amp;timeframe=<?php echo $current_timeframe ?>">Vertical View</a></li>
+	<li><a href="regions.php?mode=horizondal&amp;timeframe=<?php echo $current_timeframe ?>">Horizondal View</a></li>
+	<li><a href="people.php?city_id=<?php echo $current_user['city_id'] ?>&amp;timeframe=<?php echo $current_timeframe ?>">Team View</a></li>
+	<li><form action="" method="post" id="timeframe-chooser"><select name="timeframe">
 		<?php
 		$all_timeframes = array(
 				'1'	=> 'Jan - Feb',
