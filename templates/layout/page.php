@@ -51,7 +51,13 @@
 		}
 		?>
 	</select><input type="submit" name="action" value="Change" class="btn btn-default btn-xs" /></form></li>
-	</ul>
+	</ul><br />
+
+	<form action="search.php" method="post" id="search-area" class="input-group input-group-sm pull-right col-md-3">
+	<input type="text" name="search" id="search" placeholder="Search..." value="<?php echo i($QUERY,'search'); ?>" class="form-control" />
+	<span class="input-group-btn"><button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button></span>
+	</form>
+
 	</div>
 </div>
 </div>
@@ -66,7 +72,8 @@
 <script src="<?php echo $config['site_url'] ?>bower_components/jquery/dist/jquery.min.js" type="text/javascript"></script>
 <script src="<?php echo $config['site_url'] ?>bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="<?php echo $config['site_home'] ?>js/application.js" type="text/javascript"></script>
-
 <?php echo $js_includes ?>
+<script type="text/javascript" src="http://makeadiff.in/madapp/js/uservoice.js"></script>
+
 </body>
 </html>
