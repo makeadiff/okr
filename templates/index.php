@@ -1,6 +1,6 @@
-<h2><?php echo $_SESSION['name'] ?> <span class="badge"><?php echo $person_grade ?></span></h2>
+<h2><?php echo $current_user['name'] ?> <span class="badge"><?php echo $person_grade ?></span></h2>
 
-<form action="" method="post">
+<form action="index.php" method="post">
 <h4>Objectives</h4>
 <ul class="objectives">
 <?php foreach($objectives as $obj_id => $obj) { ?>
@@ -19,6 +19,13 @@
 <?php } ?>
 <li><input type="text" name="new_objective[]" value="" placeholder="New Objective" class="objective_entry" /></li>
 </ul>
+<?php if(isset($save_data) and $save_data) {
+	if(!in_array($current_cycle, $archived)) { ?>
 <input type="submit" name="action" value="Save" class="btn btn-primary" />
 <input type="submit" name="action" value="Lock and Archive Data" class="btn btn-success btn-sm" />
+<input type="hidden" name="user_id" value="<?php echo $user_id ?>" />
+<input type="hidden" name="return_to" value="person.php?user_id=<?php echo $user_id ?>" />
+<?php } 
+ } ?>
+
 </form>

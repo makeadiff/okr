@@ -19,38 +19,27 @@
 
 	<div class="collapse navbar-collapse">
 	<ul id="nav-links" class="nav navbar-nav pull-right">
-	<li><a href="index.php?timeframe=<?php echo $current_timeframe ?>">Home</a></li>
-	<li><a href="person.php?user_id=0&amp;timeframe=<?php echo $current_timeframe ?>">Random ;-)</a></li>
-	<li><a href="verticals.php?mode=vertical&amp;timeframe=<?php echo $current_timeframe ?>">Vertical View</a></li>
-	<li><a href="regions.php?mode=horizondal&amp;timeframe=<?php echo $current_timeframe ?>">Horizontal View</a></li>
-	<li><a href="people.php?city_id=<?php echo $current_user['city_id'] ?>&amp;timeframe=<?php echo $current_timeframe ?>">Team View</a></li>
-	<li><form action="" method="post" id="timeframe-chooser"><select name="timeframe">
+	<li><a href="index.php?cycle=<?php echo $current_cycle ?>">Home</a></li>
+	<li><a href="person.php?user_id=0&amp;cycle=<?php echo $current_cycle ?>">Random ;-)</a></li>
+	<li><a href="verticals.php?mode=vertical&amp;cycle=<?php echo $current_cycle ?>">Vertical View</a></li>
+	<li><a href="regions.php?mode=horizondal&amp;cycle=<?php echo $current_cycle ?>">Horizontal View</a></li>
+	<li><a href="people.php?city_id=<?php echo $current_user['city_id'] ?>&amp;cycle=<?php echo $current_cycle ?>">Team View</a></li>
+	<li><form action="" method="post" id="cycle-chooser"><select name="cycle">
 		<?php
-		$all_timeframes = array(
-				'1'	=> 'Jan - Feb',
-				'2'	=> 'Feb - Mar',
-				'3'	=> 'Mar - Apr',
-				'4'	=> 'Apr - May',
-				'5'	=> 'May - June',
-				'6'	=> 'June - July',
-				'7'	=> 'July - Aug',
-				'8'	=> 'Aug - Sept',
-				'9'	=> 'Sept - Oct',
-				'10'=> 'Oct - Nov',
-				'11'=> 'Nov - Dec',
-				'12'=> 'Dec - Jan'
+		$all_cycles = array(
+				'1'	=> 'Cycle 1',
+				'2'	=> 'Cycle 2',
+				'3'	=> 'Cycle 3',
+				'4'	=> 'Cycle 4',
+				'5'	=> 'Cycle 5'
 			);
-		$archived_timeframes = $sql->getCol("SELECT timeframe FROM OKR_Archive WHERE user_id=$user_id");
-		array_push($archived_timeframes, $current_timeframe);
-		$archived_timeframes = array_unique($archived_timeframes);
-		foreach ($archived_timeframes as $timeframe) {
-			print "<option value='$timeframe'";
-			if($timeframe == $current_timeframe) print " selected='selected'";
-			print ">";
-			print $all_timeframes[$timeframe] . "</option>";
+		foreach ($all_cycles as $cycle => $name) {
+			print "<option value='$cycle'";
+			if($cycle == $current_cycle) print " selected='selected'";
+			print ">" . $name . "</option>";
 		}
 		?>
-	</select><input type="submit" name="action" value="Change" class="btn btn-default btn-xs" /></form></li>
+	</select><input type="submit" name="change-cycle" value="Change" class="btn btn-default btn-xs" /></form></li>
 	</ul><br />
 
 	<form action="search.php" method="post" id="search-area" class="input-group input-group-sm pull-right col-md-3">

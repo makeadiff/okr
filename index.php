@@ -3,6 +3,9 @@ require_once('./common.php');
 $saved = false;
 
 if(i($QUERY, 'action')) {
+	$user_id = i($QUERY,'user_id', $user_id);
+
+	dump($QUERY);
 	// Add new things.
 	if(isset($QUERY['new_objective'])) {
 		foreach ($QUERY['new_objective'] as $obj) {
@@ -12,7 +15,7 @@ if(i($QUERY, 'action')) {
 					'subject'	=> $obj, 
 					'user_id'	=> $user_id, 
 					'type'		=> 'personal', 
-					'timeframe' => $current_timeframe,
+					'cycle'		=> $current_cycle,
 					'grade'		=> 0));
 			if($objective_id) $saved = true;
 		}
@@ -67,9 +70,14 @@ if(i($QUERY, 'action')) {
 		}
 	}
 
+	if(isset($QUERY['return_to'])) {
+		header("Location: $QUERY[return_to]");
+		exit;
+	}
 }
 
-$objectives = $sql->getById("SELECT id,subject,grade FROM OKR_Objective WHERE user_id=$user_id AND type='personal' AND timeframe='$current_timeframe'");
+$archived = $sql->getCol("SELECT cycle FROM OKR_Archive WHERE user_id=$user_id");
+$objectives = $sql->getById("SELECT id,subject,grade FROM OKR_Objective WHERE user_id=$user_id AND type='personal' AND cycle='$current_cycle'");
 foreach ($objectives as $key => $data) {
 	$objectives[$key]['key_results'] = $sql->getById("SELECT id,subject,grade FROM OKR_Key_Result WHERE objective_id='$key'");
 
@@ -90,8 +98,7 @@ foreach ($objectives as $key => $data) {
 $person_grade = getGrade(array('user_id'=>$user_id));
 
 if(i($QUERY, 'action') == 'Lock and Archive Data') {
-	$sql->insert("OKR_Archive", array('user_id'=>$user_id, 'timeframe'=>$current_timeframe));
-	$current_timeframe++;
+	$sql->insert("OKR_Archive", array('user_id'=>$user_id, 'cycle'=>$current_cycle));
 	$objectives = array();
 }
 

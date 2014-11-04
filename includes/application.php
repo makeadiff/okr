@@ -1,24 +1,16 @@
 <?php
-if(empty($_SESSION['user_id'])) {
-	$url_parts = parse_url($config['site_url']);
-	$domain = $url_parts['scheme'] . '://' . $url_parts['host'];
-	$madapp_url = "http://makeadiff.in/madapp/";
-	if(strpos($config['site_home'], 'localhost') !== false) $madapp_url = "http://localhost/Projects/Madapp/";
+require_once('../support/includes/application.php');
 
-	header("Location: " . $madapp_url . "index.php/auth/login/" . base64_encode($domain . $config['PHP_SELF']));
-	exit;
+if(isset($QUERY['change-cycle']) and isset($QUERY['cycle'])) {
+	$current_cycle = $QUERY['cycle'];
+	$_SESSION['current_cycle'] = $current_cycle;
+
+} elseif(isset($_SESSION['current_cycle'])) {
+	$current_cycle = $_SESSION['current_cycle'];
+
+} else {
+	$current_cycle = get_cycle();
 }
-
-$user_id = $_SESSION['user_id'];
-$current_user = $sql->from('User')->find($user_id);
-
-$current_timeframe = i($QUERY,'timeframe',0);
-if(!$current_timeframe) {
-	$last_timeframe = $sql->getOne("SELECT timeframe FROM OKR_Archive WHERE user_id=$user_id ORDER BY timeframe DESC LIMIT 0,1");
-	if($last_timeframe) $current_timeframe = $last_timeframe + 1;
-	else $current_timeframe = 5;
-}
-
 
 function showGrade($id) {
 	global $grades;
@@ -26,7 +18,7 @@ function showGrade($id) {
 }
 
 function getGrades($type) {
-	global $sql, $QUERY, $current_timeframe;
+	global $sql, $QUERY, $current_cycle;
 
 	$wheres = array(
 		"mode_id"	=> i($QUERY, 'mode', 'both'), 
@@ -34,7 +26,7 @@ function getGrades($type) {
 		"city_id"	=> i($QUERY,'city_id', 0),
 		"region_id"	=> i($QUERY,'region_id', 0),
 		"vertical_id"	=> i($QUERY, 'vertical_id', 0),
-		"timeframe"	=> $current_timeframe,
+		"cycle"		=> $current_cycle,
 	);
 	unset($wheres[$type]);
 
@@ -43,16 +35,6 @@ function getGrades($type) {
 	return $grades;
 
 }
-
-function color() {
-	static $index = 0;
-	//$col = array('#EEA2AD', '#4876FF', '#1E90FF', '#00BFFF', '#00FA9A', '#76EE00','#CD950C', '#FFDEAD', '#EED5B7', '#FFA07A', '#FF6347', '#EE6363', '#71C671');
-	$col = array('#f1632a','#ffe800','#282829','#22bbb8','#7e3f98','#54b847','#f1632a','#ffe800','#282829','#22bbb8','#7e3f98','#54b847','#e5002f');
-	$index++;
-
-	if($index >= count($col)) $index = 0;
-	return $col[$index];
-} 
 
 function getNext() {
 	global $modes, $template;
