@@ -106,4 +106,5 @@ if($saved) {
 	$QUERY['success'] = 'Database updated.';
 }
 
+$save_data = true;
 render();
