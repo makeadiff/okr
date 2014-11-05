@@ -1,11 +1,9 @@
 <?php
 require_once('./common.php');
 $saved = false;
+$user_id = i($QUERY,'user_id', $user_id);
 
-if(i($QUERY, 'action')) {
-	$user_id = i($QUERY,'user_id', $user_id);
-
-	dump($QUERY);
+if(i($QUERY, 'action') == 'Save') {
 	// Add new things.
 	if(isset($QUERY['new_objective'])) {
 		foreach ($QUERY['new_objective'] as $obj) {
@@ -100,6 +98,10 @@ $person_grade = getGrade(array('user_id'=>$user_id));
 if(i($QUERY, 'action') == 'Lock and Archive Data') {
 	$sql->insert("OKR_Archive", array('user_id'=>$user_id, 'cycle'=>$current_cycle));
 	$objectives = array();
+	if(isset($QUERY['return_to'])) {
+		header("Location: $QUERY[return_to]");
+		exit;
+	}
 }
 
 if($saved) {

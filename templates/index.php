@@ -19,13 +19,26 @@
 <?php } ?>
 <li><input type="text" name="new_objective[]" value="" placeholder="New Objective" class="objective_entry" /></li>
 </ul>
-<?php if(isset($save_data) and $save_data) {
+<?php 
+if(isset($save_data) and $save_data) {
 	if(!in_array($current_cycle, $archived)) { ?>
 <input type="submit" name="action" value="Save" class="btn btn-primary" />
-<input type="submit" name="action" value="Lock and Archive Data" class="btn btn-success btn-sm" />
 <input type="hidden" name="user_id" value="<?php echo $user_id ?>" />
 <input type="hidden" name="return_to" value="person.php?user_id=<?php echo $user_id ?>" />
 <?php } 
- } ?>
+} ?>
+</form><br /><br />
 
-</form>
+<?php 
+if(isset($save_data) and $save_data) {
+	if(!in_array($current_cycle, $archived)) { ?>
+<p>All targets set?</p>
+
+<form action="index.php" method="post">
+<input type="submit" name="action" value="Lock and Archive Data" class="btn btn-success btn-sm" />
+<input type="hidden" name="user_id" value="<?php echo $user_id ?>" />
+<input type="hidden" name="cycle" value="<?php echo $cycle ?>" />
+<input type="hidden" name="return_to" value="person.php?user_id=<?php echo $user_id ?>" />
+<?php }
+}
+?>
