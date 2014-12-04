@@ -19,13 +19,15 @@
 <?php } ?>
 <li><input type="text" name="new_objective[]" value="" placeholder="New Objective" class="objective_entry" /></li>
 </ul>
-<?php 
+<?php
 if(isset($save_data) and $save_data) {
 	if(!in_array($current_cycle, $archived)) { ?>
 <input type="submit" name="action" value="Save" class="btn btn-primary" />
 <input type="hidden" name="user_id" value="<?php echo $user_id ?>" />
-<input type="hidden" name="return_to" value="person.php?user_id=<?php echo $user_id ?>" />
-<?php } 
+<!-- <input type="hidden" name="return_to" value="person.php?user_id=<?php echo $user_id ?>" /> -->
+<?php } else {
+	print "<p>Data Archived! No further edits possible.</p>";
+	}
 } ?>
 </form><br /><br />
 
@@ -38,7 +40,9 @@ if(isset($save_data) and $save_data) {
 <input type="submit" name="action" value="Lock and Archive Data" class="btn btn-success btn-sm" />
 <input type="hidden" name="user_id" value="<?php echo $user_id ?>" />
 <input type="hidden" name="cycle" value="<?php echo $cycle ?>" />
-<input type="hidden" name="return_to" value="person.php?user_id=<?php echo $user_id ?>" />
+<!-- <input type="hidden" name="return_to" value="person.php?user_id=<?php echo $user_id ?>" /> -->
+</form>
+
 <?php }
 }
 ?>

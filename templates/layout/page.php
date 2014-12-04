@@ -19,7 +19,7 @@
 
 	<div class="collapse navbar-collapse">
 	<ul id="nav-links" class="nav navbar-nav pull-right">
-	<li><a href="index.php?cycle=<?php echo $current_cycle ?>">Home</a></li>
+	<li><a href="http://makeadiff.in/madapp/index.php/dashboard/dashboard_view">MADApp Dashboard</a></li>
 	<li><a href="person.php?user_id=0&amp;cycle=<?php echo $current_cycle ?>">Random ;-)</a></li>
 	<li><a href="verticals.php?mode=vertical&amp;cycle=<?php echo $current_cycle ?>">Vertical View</a></li>
 	<li><a href="regions.php?mode=horizondal&amp;cycle=<?php echo $current_cycle ?>">Horizontal View</a></li>
